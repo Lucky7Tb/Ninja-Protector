@@ -9,7 +9,9 @@ public class Player : MonoBehaviour
     public float moveSpeed = 8f;
     float attackRate = 2f;
     float nextAttackTime = 0f;
-    
+
+    public Animator animator;
+    public GameObject blood; 
     PlayerAttack playerAttack;
     PlayerController playerController;
 
@@ -20,15 +22,33 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        playerController.move(Input.GetAxisRaw("Horizontal"), moveSpeed);
-       
-        if(Time.time > nextAttackTime) 
+        if(health > 0)
         {
-            if(Input.GetMouseButtonDown(0)) 
+            playerController.move(Input.GetAxisRaw("Horizontal"), moveSpeed);
+        
+            if(Time.time > nextAttackTime) 
             {
-                playerAttack.attack(damage);
-                nextAttackTime = Time.time + 1f / attackRate;
+                if(Input.GetMouseButtonDown(0)) 
+                {
+                    playerAttack.attack(damage);
+                    nextAttackTime = Time.time + 1f / attackRate;
+                }
             }
+        } else {
+            playerController.move(Input.GetAxisRaw("Horizontal"), 0);
+        }
+    }
+
+    public void takeDamage(float takenDamage)
+    {
+        health -= takenDamage;
+        GameObject cloneBlood = Instantiate(blood);
+        cloneBlood.transform.position = transform.position;
+        Destroy(cloneBlood, 0.5f);
+        if(health <= 0)
+        {
+            animator.SetTrigger("PlayerDead");
+            GetComponent<Collider2D>().enabled = false;
         }
     }
 }

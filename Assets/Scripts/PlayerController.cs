@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float horizontalMove = 0f;
     public Animator animator;
+    public float horizontalMove = 0f;
 
     public void move(float direction, float moveSpeed) 
     {

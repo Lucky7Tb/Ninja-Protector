@@ -4,43 +4,45 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    public GameObject player;
+    public Animator animator;
+    GameObject player;
     Enemy enemy;
+    EnemyAttack enemyAttack;
+    float attackRate = 0.5f;
+    float nextAttackTime = 0f;
 
-    void Start() 
+    void Start()
     {
-        enemy = GameObject.FindObjectOfType<Enemy>();    
+        player =  GameObject.Find("Player");
+        enemy = GameObject.FindObjectOfType<Enemy>();
+        enemyAttack = GameObject.FindObjectOfType<EnemyAttack>();
     }
 
-    void Update() 
-    {
-        findPlayer();    
-    }
-
-    public void findPlayer()
+    public void findPlayer(float movementSpeed)
     {
         float playerPosition = Mathf.Abs(player.transform.position.x);
         float enemyPosition = Mathf.Abs(transform.position.x);
-        // Debug.Log(Mathf.Ceil(Mathf.Abs(playerPosition - enemyPosition)));
-
         if(Mathf.Ceil(Mathf.Abs(playerPosition - enemyPosition)) < 2)
         {
-            enemy.animator.SetFloat("EnemySpeed", 0f);
-            // transform.Translate(Vector3.left * Time.deltaTime * 0);
+            animator.SetFloat("EnemySpeed", 0f);
+            if(Time.time > nextAttackTime) 
+            {
+                enemyAttack.attack(enemy.damage);
+                nextAttackTime = Time.time + 1f / attackRate;
+            }
         } else {
-            enemy.animator.SetFloat("EnemySpeed", enemy.speed);
+            animator.SetFloat("EnemySpeed", movementSpeed);
             if(player.transform.position.x < transform.position.x)
             {
                 transform.localScale = new Vector3(-1, 1, 1);
-                transform.Translate(Vector3.left * Time.deltaTime * enemy.speed);
+                transform.Translate(Vector3.left * Time.deltaTime * movementSpeed);
             }
             
             if(player.transform.position.x > transform.position.x)
             {
                 transform.localScale = new Vector3(1, 1, 1);
-                transform.Translate(Vector3.right * Time.deltaTime * enemy.speed);
+                transform.Translate(Vector3.right * Time.deltaTime * movementSpeed);
             }
         }
     }
-
 }

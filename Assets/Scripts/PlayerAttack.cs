@@ -17,7 +17,10 @@ public class PlayerAttack : MonoBehaviour
 
         foreach(Collider2D enemy in enemies) 
         {
-            enemy.GetComponent<Enemy>().TakeDamage(damage);
+            if(enemy.GetComponent<Enemy>() != null)
+            {
+                enemy.GetComponent<Enemy>().takeDamage(damage);
+            }
         }
     }
 

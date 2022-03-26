@@ -4,15 +4,27 @@ using UnityEngine;
 
 public class EnemyAttack : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public Animator animator;
+    public Transform areaHitPoint;
+    public LayerMask playerLayers;
+    public float attackRange = 0.4f;
+
+    public void attack(float damage)
     {
-        
+        Collider2D player = Physics2D.OverlapCircle(areaHitPoint.position, attackRange, playerLayers);
+        if(player != null)
+        {
+            animator.SetTrigger("EnemyAttack");
+            player.GetComponent<Player>().takeDamage(damage);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    void OnDrawGizmosSelected() 
     {
-        
+        if(areaHitPoint == null)
+        {
+            return;
+        }
+        Gizmos.DrawWireSphere(areaHitPoint.position, attackRange);    
     }
 }
