@@ -8,24 +8,22 @@ public class PlayerAttack : MonoBehaviour
     public Animator animator;
     public Transform areaHitPoint;
     public LayerMask enemyLayers;
-    public float attackRange = 0.5f;
-    public Player player;
+    float attackRange = 0.5f;
 
-    private void Start() {
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();    
-    }
-
-    public void Attack() {
-        animator.SetTrigger("player_attack");
+    public void attack(float damage) 
+    {
+        animator.SetTrigger("PlayerAttack");
         Collider2D[] enemies = Physics2D.OverlapCircleAll(areaHitPoint.position, attackRange, enemyLayers);
 
-        foreach(Collider2D enemy in enemies) {
-            enemy.GetComponent<Enemy>().TakeDamage(player.playerAttackDamage);
+        foreach(Collider2D enemy in enemies) 
+        {
+            enemy.GetComponent<Enemy>().TakeDamage(damage);
         }
     }
 
     void OnDrawGizmosSelected() {
-        if(areaHitPoint == null) {
+        if(areaHitPoint == null)
+        {
             return;
         }
         Gizmos.DrawWireSphere(areaHitPoint.position, attackRange);    

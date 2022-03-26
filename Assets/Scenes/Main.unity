@@ -133,12 +133,11 @@ GameObject:
   m_Component:
   - component: {fileID: 82563255}
   - component: {fileID: 82563254}
-  - component: {fileID: 82563253}
   - component: {fileID: 82563252}
   - component: {fileID: 82563257}
-  - component: {fileID: 82563256}
-  - component: {fileID: 82563259}
   - component: {fileID: 82563258}
+  - component: {fileID: 82563259}
+  - component: {fileID: 82563253}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -172,27 +171,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.56, y: 1.0978614}
   m_EdgeRadius: 0
---- !u!50 &82563253
-Rigidbody2D:
-  serializedVersion: 4
+--- !u!114 &82563253
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 82563251}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 3
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e080c8ae00b633d4296513d52c140923, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  horizontalMove: 0
+  animator: {fileID: 82563257}
 --- !u!212 &82563254
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -252,29 +244,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 82563251}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.87, y: -2.3, z: -3.0556734}
+  m_LocalPosition: {x: -7.52, y: -2.3, z: -3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 928718218}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &82563256
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 82563251}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df42127422e040d458a5d906c27ebf3a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerSpeed: 30
-  horizontalMove: 0
-  playerRigidbody: {fileID: 82563253}
-  animator: {fileID: 82563257}
 --- !u!95 &82563257
 Animator:
   serializedVersion: 3
@@ -306,10 +282,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b62719fb5603a824d94a49e5fba63e28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerAttackDamage: 20
-  playerHealth: 100
-  playerAttack: {fileID: 0}
-  playerControler: {fileID: 0}
+  damage: 20
+  health: 100
+  moveSpeed: 8
 --- !u!114 &82563259
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -327,8 +302,6 @@ MonoBehaviour:
   enemyLayers:
     serializedVersion: 2
     m_Bits: 8
-  attackRange: 0.66
-  player: {fileID: 0}
 --- !u!1001 &207528866
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -471,6 +444,36 @@ Transform:
   m_LocalScale: {x: 0.602, y: 0.602, z: 0.602}
   m_Children: []
   m_Father: {fileID: 1654511746}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &402009621
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 402009622}
+  m_Layer: 0
+  m_Name: Spawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &402009622
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 402009621}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -9, y: -2.51, z: -44.035904}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &429775609
@@ -2247,11 +2250,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2109685205}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.81, y: -2.5, z: -2.0843012}
+  m_LocalPosition: {x: 3.84, y: -2.5, z: -2}
   m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &2109685208
 BoxCollider2D:
@@ -2310,6 +2313,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12f41264fcdb92346973b857800bf540, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 82563251}
 --- !u!114 &2109685211
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2324,9 +2328,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 2109685209}
   originalBlood: {fileID: 7564116642760209187, guid: 185dcf0bd2e4bd34bbd2f9384ae09bc0, type: 3}
-  enemyHealth: 104.19
-  enemyDamage: 5
-  horizontalMove: 0
+  speed: 3.5
 --- !u!1 &2113440383
 GameObject:
   m_ObjectHideFlags: 0

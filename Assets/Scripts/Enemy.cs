@@ -7,19 +7,23 @@ public class Enemy : MonoBehaviour
     public Animator animator;
     public GameObject originalBlood;
     GameObject cloneBlood;
-    public float enemyHealth = 100f;
-    public float enemyDamage = 5f;
-    public float horizontalMove = 0f;
-    
+    float health = 100f;
+    // float damage = 5f;
+    public float speed = 3.5f;
+
     public void TakeDamage(float damage) {
-        enemyHealth -= damage;
+        health -= damage;
+        speed = 0f;
 
         animator.SetTrigger("GetHit");
         cloneBlood = Instantiate(originalBlood);
         cloneBlood.transform.position = transform.position;
         Destroy(cloneBlood, 0.5f);
-        if(enemyHealth <= 0) {
+        if(health <= 0) {
+            speed = 0f;
             Die();
+        } else {
+            speed = 3.5f;
         }
     }
     

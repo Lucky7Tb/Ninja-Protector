@@ -4,23 +4,31 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public float playerAttackDamage = 20f;
-    public float playerHealth = 100f;
-    public PlayerAttack playerAttack;
-    public PlayerControler playerControler;
+    public float damage = 20f;
+    public float health = 100f;
+    public float moveSpeed = 8f;
+    float attackRate = 2f;
+    float nextAttackTime = 0f;
+    
+    PlayerAttack playerAttack;
+    PlayerController playerController;
 
     void Start() {
-        playerControler = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControler>();
-        playerAttack = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerAttack>();    
+        playerController = GameObject.FindObjectOfType<PlayerController>();
+        playerAttack = GameObject.FindObjectOfType<PlayerAttack>();    
     }
 
-    // Update is called once per frame
     void Update()
     {
-        playerControler.Move(Input.GetAxisRaw("Horizontal"));
-        
-        if(Input.GetMouseButtonDown(0)) {
-            playerAttack.Attack();
+        playerController.move(Input.GetAxisRaw("Horizontal"), moveSpeed);
+       
+        if(Time.time > nextAttackTime) 
+        {
+            if(Input.GetMouseButtonDown(0)) 
+            {
+                playerAttack.attack(damage);
+                nextAttackTime = Time.time + 1f / attackRate;
+            }
         }
     }
 }
