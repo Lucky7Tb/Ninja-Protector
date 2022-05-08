@@ -8,6 +8,12 @@ public class EnemyAttack : MonoBehaviour
     public Transform areaHitPoint;
     public LayerMask playerLayers;
     public float attackRange = 0.4f;
+    Enemy enemy;
+
+    void Start()
+    {
+        enemy = GetComponent<Enemy>();
+    }
 
     public void attack(float damage)
     {
@@ -15,6 +21,7 @@ public class EnemyAttack : MonoBehaviour
         if(player != null)
         {
             animator.SetTrigger("EnemyAttack");
+            enemy.enemyAudio.PlayOneShot(enemy.swordSound, 0.5f);
             player.GetComponent<Player>().takeDamage(damage);
         }
     }

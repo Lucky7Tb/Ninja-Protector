@@ -4,39 +4,47 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public float damage = 20f;
+    public float damage = 25f;
     public float health = 100f;
     public float moveSpeed = 8f;
     float attackRate = 2f;
     float nextAttackTime = 0f;
+    bool gameOver = false;
 
     public Animator animator;
     public GameObject blood; 
     PlayerAttack playerAttack;
     PlayerController playerController;
+    public AudioClip swordSound;   
+    AudioSource playerAudio; 
 
     void Start() {
-        playerController = GameObject.FindObjectOfType<PlayerController>();
-        playerAttack = GameObject.FindObjectOfType<PlayerAttack>();    
+        playerController = GetComponent<PlayerController>();
+        playerAttack = GetComponent<PlayerAttack>();   
+        playerAudio = GetComponent<AudioSource>();
     }
 
     void Update()
     {
-        if(health > 0)
+        if(!gameOver)
         {
-            playerController.move(Input.GetAxisRaw("Horizontal"), moveSpeed);
-        
-            if(Time.time > nextAttackTime) 
+            if(health > 0)
             {
-                if(Input.GetMouseButtonDown(0)) 
+                playerController.move(Input.GetAxisRaw("Horizontal"), moveSpeed);
+            
+                if(Time.time > nextAttackTime) 
                 {
-                    playerAttack.attack(damage);
-                    nextAttackTime = Time.time + 1f / attackRate;
+                    if(Input.GetMouseButtonDown(0)) 
+                    {
+                        playerAttack.attack(damage);
+                        playerAudio.PlayOneShot(swordSound, 0.5f);
+                        nextAttackTime = Time.time + 1f / attackRate;
+                    }
                 }
+            } else {
+                gameOver = true;
             }
-        } else {
-            playerController.move(Input.GetAxisRaw("Horizontal"), 0);
-        }
+        } 
     }
 
     public void takeDamage(float takenDamage)

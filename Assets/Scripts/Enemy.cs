@@ -4,17 +4,19 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public Animator animator;
-    public GameObject blood;
-    EnemyAttack enemyAttack;
-    EnemyController enemyController;
     float health = 100f;
     public float damage = 5f;
     float speed = 3.5f;
+    public Animator animator;
+    public GameObject blood;
+    EnemyController enemyController;
+    public AudioClip swordSound;   
+    public AudioSource enemyAudio; 
 
     void Start() 
     {
         enemyController = GameObject.FindObjectOfType<EnemyController>();
+        enemyAudio = GetComponent<AudioSource>();
     }
 
     void Update() 

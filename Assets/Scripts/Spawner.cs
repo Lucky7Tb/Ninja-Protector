@@ -5,23 +5,37 @@ using UnityEngine;
 public class Spawner : MonoBehaviour
 {
     public GameObject goblin;
-    public float nextSpawnTime = 0f;
-    public float spawnTime = 5f;
+    public GameObject food;
+    public float enemyNextSpawnTime = 0f;
+    public float enemySpawnTime = 10f;
+    // Left position, right position
+    Vector3[] enemySpawnPosition = {new Vector3(-7f, -2.5f, -2), new Vector3(7f, -2.5f, -2)};
     
-    // Update is called once per frame
+    void Start()
+    {
+        spawnFood();
+    }
+
     void Update()
     {
-        if(Time.time > nextSpawnTime)
+        if(Time.time > enemyNextSpawnTime)
         {
-            spaw();
-            nextSpawnTime += spawnTime;
+            spawEnemy();
+            enemyNextSpawnTime += enemySpawnTime;
         }    
     }
 
-    void spaw()
+    void spawEnemy()
     {
-        Vector3 spawnPosition = new Vector3(7f, -2.5f, -2f);
+        int randomSpawnIndex = Random.Range(0, 2);
+        Vector3 spawnPosition = enemySpawnPosition[randomSpawnIndex];
         GameObject cloneGoblin = Instantiate(goblin);
         cloneGoblin.transform.position = spawnPosition;
+    }
+
+    void spawnFood()
+    {
+        GameObject cloneFood = Instantiate(food);
+        cloneFood.transform.position = new Vector3(-0.5f, 3, 3);
     }
 }
