@@ -5,16 +5,14 @@ using UnityEngine;
 public class Spawner : MonoBehaviour
 {
     public GameObject goblin;
-    public GameObject food;
     public float enemyNextSpawnTime = 0f;
     public float enemySpawnTime = 10f;
     // Left position, right position
     Vector3[] enemySpawnPosition = {new Vector3(-7f, -2.5f, -2), new Vector3(7f, -2.5f, -2)};
     
-    void Start()
-    {
-        spawnFood();
-    }
+    public GameObject food;
+    public float foodNextSpawnTime = 0f;
+    public float foodSpawnTime = 15f;
 
     void Update()
     {
@@ -22,6 +20,12 @@ public class Spawner : MonoBehaviour
         {
             spawEnemy();
             enemyNextSpawnTime += enemySpawnTime;
+        }    
+        
+        if(Time.time > foodNextSpawnTime)
+        {
+            spawnFood();
+            foodNextSpawnTime += foodSpawnTime;
         }    
     }
 
@@ -35,7 +39,8 @@ public class Spawner : MonoBehaviour
 
     void spawnFood()
     {
+        int randomXPosition = Random.Range(-9, 8);
         GameObject cloneFood = Instantiate(food);
-        cloneFood.transform.position = new Vector3(-0.5f, 3, 3);
+        cloneFood.transform.position = new Vector3(randomXPosition, 3, 3);
     }
 }

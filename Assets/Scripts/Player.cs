@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    float healthUpPoint = 10f;
     public float damage = 25f;
     public float health = 100f;
     public float moveSpeed = 8f;
@@ -18,6 +19,7 @@ public class Player : MonoBehaviour
     public AudioClip swordSound;   
     AudioSource playerAudio; 
 
+    
     void Start() {
         playerController = GetComponent<PlayerController>();
         playerAttack = GetComponent<PlayerAttack>();   
@@ -57,6 +59,15 @@ public class Player : MonoBehaviour
         {
             animator.SetTrigger("PlayerDead");
             GetComponent<Collider2D>().enabled = false;
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if(other.gameObject.CompareTag("Food"))
+        {
+            health += healthUpPoint;
+            Destroy(other.gameObject);
         }
     }
 }
