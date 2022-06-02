@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+
+    public int score = 0;
+
     float healthUpPoint = 10f;
     public float damage = 25f;
     public float health = 100f;
@@ -16,7 +19,9 @@ public class Player : MonoBehaviour
     public GameObject blood; 
     PlayerAttack playerAttack;
     PlayerController playerController;
-    public AudioClip swordSound;   
+    
+    public AudioClip swordSound; 
+    public AudioClip appleBiteSound; 
     AudioSource playerAudio; 
 
     
@@ -49,6 +54,13 @@ public class Player : MonoBehaviour
         } 
     }
 
+    IEnumerator PowerupCooldown()
+    {
+        yield return new WaitForSeconds(10);
+        damage -= 10f;
+        attackRate += 0.5f;
+    }
+
     public void takeDamage(float takenDamage)
     {
         health -= takenDamage;
@@ -67,7 +79,26 @@ public class Player : MonoBehaviour
         if(other.gameObject.CompareTag("Food"))
         {
             health += healthUpPoint;
+            playerAudio.PlayOneShot(appleBiteSound, 0.3f);
             Destroy(other.gameObject);
+        }
+
+        if(other.gameObject.CompareTag("AttackPowerUp"))
+        {
+            Destroy(other.gameObject);
+            damage += 10f;
+            attackRate -= 0.5f;
+            StartCoroutine(PowerupCooldown());
+        }
+
+        if(other.gameObject.CompareTag("InstantEnemyDeath"))
+        {
+            Destroy(other.gameObject);
+            GameObject[] goblins = GameObject.FindGameObjectsWithTag("Enemy");
+            foreach(GameObject goblin in goblins)
+            {
+                goblin.GetComponent<Enemy>().takeDamage(10000f);
+            }
         }
     }
 }

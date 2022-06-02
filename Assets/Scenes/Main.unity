@@ -178,6 +178,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gravestone(1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1755214644681904958, guid: f39426a001c71d84999be2ee63c7d322, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f39426a001c71d84999be2ee63c7d322, type: 3}
 --- !u!4 &207528867 stripped
@@ -195,7 +199,7 @@ GameObject:
   m_Component:
   - component: {fileID: 260879282}
   - component: {fileID: 260879281}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cloud(4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -261,7 +265,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 260879280}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.152198, y: 1.6720471, z: 3.5011358}
+  m_LocalPosition: {x: 7.152198, y: 2.81, z: 3.5011358}
   m_LocalScale: {x: 0.602, y: 0.602, z: 0.602}
   m_Children: []
   m_Father: {fileID: 1654511746}
@@ -312,8 +316,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   goblin: {fileID: 3077087895579235092, guid: 6a69ac485d1da364a8dde68914fef359, type: 3}
   food: {fileID: 7478189960424040071, guid: d732c433f052247478d37fac6cedfe30, type: 3}
-  enemyNextSpawnTime: 0
-  enemySpawnTime: 10
+  sleepingDust: {fileID: 811720089653587268, guid: 949ecf39c259b5947b5c3ee6bca1d8ce, type: 3}
+  attackPowerUpIcon: {fileID: 285440607018141076, guid: 87d5f2d762f8887489f796f0e04bfa58, type: 3}
+  instantEnemyDeathIcon: {fileID: 8002675498326481800, guid: 7efa03443b70df246a2db1910cfc6c54, type: 3}
 --- !u!1 &429775609
 GameObject:
   m_ObjectHideFlags: 0
@@ -324,7 +329,7 @@ GameObject:
   m_Component:
   - component: {fileID: 429775611}
   - component: {fileID: 429775610}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Moon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -390,7 +395,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 429775609}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.54380226, y: 2.8360472, z: 3.5011358}
+  m_LocalPosition: {x: -0.42, y: 4.16, z: 3.5011358}
   m_LocalScale: {x: 0.37186694, y: 0.37186694, z: 0.37186694}
   m_Children: []
   m_Father: {fileID: 1654511746}
@@ -546,7 +551,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 4.7138176
+  orthographic size: 4.253281
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -570,7 +575,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.53, z: -20.38}
+  m_LocalPosition: {x: 0, y: 0.48, z: -20.38}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -586,7 +591,7 @@ GameObject:
   m_Component:
   - component: {fileID: 605541708}
   - component: {fileID: 605541707}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cloud(3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -652,7 +657,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 605541706}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.9771974, y: 1.8920472, z: 3.5011358}
+  m_LocalPosition: {x: 1.74, y: 3, z: 3.5011358}
   m_LocalScale: {x: 0.748, y: 0.748, z: 0.748}
   m_Children: []
   m_Father: {fileID: 1654511746}
@@ -668,6 +673,10 @@ PrefabInstance:
     - target: {fileID: 4863355952554908545, guid: d39672cc18ccd9545840277c51264e6f, type: 3}
       propertyPath: m_Name
       value: Well
+      objectReference: {fileID: 0}
+    - target: {fileID: 4863355952554908545, guid: d39672cc18ccd9545840277c51264e6f, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4863355952554908547, guid: d39672cc18ccd9545840277c51264e6f, type: 3}
       propertyPath: m_RootOrder
@@ -1610,7 +1619,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1310532624}
   - component: {fileID: 1310532623}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cloud
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1676,7 +1685,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1310532622}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -8.347803, y: 1.6720471, z: 3.5011358}
+  m_LocalPosition: {x: -8.53, y: 2.81, z: 3.5011358}
   m_LocalScale: {x: 0.602, y: 0.602, z: 0.602}
   m_Children: []
   m_Father: {fileID: 1654511746}
@@ -1737,6 +1746,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gravestone(2)
       objectReference: {fileID: 0}
+    - target: {fileID: 1822145705061090812, guid: d6770ea3eabbc694a9bad4112d5af65b, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d6770ea3eabbc694a9bad4112d5af65b, type: 3}
 --- !u!4 &1344394709 stripped
@@ -1754,7 +1767,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1403596754}
   - component: {fileID: 1403596753}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cloud(2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1820,7 +1833,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1403596752}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.0178027, y: 1.8920472, z: 3.5011358}
+  m_LocalPosition: {x: -4.11, y: 3, z: 3.5011358}
   m_LocalScale: {x: 0.748, y: 0.748, z: 0.748}
   m_Children: []
   m_Father: {fileID: 1654511746}
@@ -1866,7 +1879,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1599007681}
   - component: {fileID: 1599007680}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cloud(5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1932,7 +1945,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1599007679}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -7.6811404, y: 2.226496, z: 3.5011358}
+  m_LocalPosition: {x: -7.56, y: 3.31, z: 3.5011358}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1654511746}
@@ -1947,7 +1960,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1654511746}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2144,12 +2157,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b62719fb5603a824d94a49e5fba63e28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  score: 0
   damage: 20
   health: 100
   moveSpeed: 8
   animator: {fileID: 1869204813}
   blood: {fileID: 7564116642760209187, guid: 185dcf0bd2e4bd34bbd2f9384ae09bc0, type: 3}
   swordSound: {fileID: 8300000, guid: 4bbf6da8342862f4b834b82281948565, type: 3}
+  appleBiteSound: {fileID: 8300000, guid: f435ca33143d30e438e15f4b67ce97ba, type: 3}
 --- !u!4 &1869204812
 Transform:
   m_ObjectHideFlags: 0
@@ -2334,7 +2349,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2107757105}
   - component: {fileID: 2107757104}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cloud(6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2400,7 +2415,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2107757103}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.5621977, y: 2.3020473, z: 3.5011358}
+  m_LocalPosition: {x: 6.32, y: 3.32, z: 3.5011358}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1654511746}
@@ -2416,7 +2431,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2113440385}
   - component: {fileID: 2113440384}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Background Night
   m_TagString: Untagged
   m_Icon: {fileID: 0}

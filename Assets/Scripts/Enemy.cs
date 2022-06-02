@@ -45,8 +45,10 @@ public class Enemy : MonoBehaviour
         }
     }
     
-    void die() 
+    public void die() 
     {
+        GameObject player = GameObject.Find("Player");
+        player.GetComponent<Player>().score += 5;
         animator.SetTrigger("GoDead");
         Vector3 position = transform.position;
         position.y = -2.8f;
