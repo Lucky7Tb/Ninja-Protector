@@ -4,36 +4,37 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-
     public int score = 0;
-
-    float healthUpPoint = 10f;
+    
+    private float healthUpPoint = 10f;
     public float damage = 25f;
     public float health = 100f;
     public float moveSpeed = 8f;
-    float attackRate = 2f;
-    float nextAttackTime = 0f;
-    bool gameOver = false;
+    private float attackRate = 2f;
+    private float nextAttackTime = 0f;
+    private HealthBar healthBarScript;
 
     public Animator animator;
     public GameObject blood; 
-    PlayerAttack playerAttack;
-    PlayerController playerController;
+    private PlayerAttack playerAttack;
+    private PlayerController playerController;
+    private Spawner spawner;
     
     public AudioClip swordSound; 
-    public AudioClip appleBiteSound; 
-    AudioSource playerAudio; 
-
+    public AudioClip appleBiteSound;
+    private AudioSource playerAudio;
     
     void Start() {
         playerController = GetComponent<PlayerController>();
         playerAttack = GetComponent<PlayerAttack>();   
         playerAudio = GetComponent<AudioSource>();
+        healthBarScript = GameObject.Find("HealthBar").GetComponent<HealthBar>();
+        spawner = GameObject.Find("Spawner").GetComponent<Spawner>();
     }
 
     void Update()
     {
-        if(!gameOver)
+        if(!spawner.isGameOver)
         {
             if(health > 0)
             {
@@ -49,7 +50,7 @@ public class Player : MonoBehaviour
                     }
                 }
             } else {
-                gameOver = true;
+                spawner.isGameOver = true;
             }
         } 
     }
@@ -63,10 +64,11 @@ public class Player : MonoBehaviour
 
     public void takeDamage(float takenDamage)
     {
-        health -= takenDamage;
         GameObject cloneBlood = Instantiate(blood);
         cloneBlood.transform.position = transform.position;
         Destroy(cloneBlood, 0.5f);
+        health -= takenDamage;
+        healthBarScript.SetSliderHealth(health);
         if(health <= 0)
         {
             animator.SetTrigger("PlayerDead");
@@ -79,6 +81,7 @@ public class Player : MonoBehaviour
         if(other.gameObject.CompareTag("Food"))
         {
             health += healthUpPoint;
+            healthBarScript.SetSliderHealth(health);
             playerAudio.PlayOneShot(appleBiteSound, 0.3f);
             Destroy(other.gameObject);
         }
@@ -94,6 +97,17 @@ public class Player : MonoBehaviour
         if(other.gameObject.CompareTag("InstantEnemyDeath"))
         {
             Destroy(other.gameObject);
+            GameObject[] goblins = GameObject.FindGameObjectsWithTag("Enemy");
+            foreach(GameObject goblin in goblins)
+            {
+                goblin.GetComponent<Enemy>().takeDamage(10000f);
+            }
+        }
+        
+        if(other.gameObject.CompareTag("SleepingDust"))
+        {
+            Destroy(other.gameObject);
+
             GameObject[] goblins = GameObject.FindGameObjectsWithTag("Enemy");
             foreach(GameObject goblin in goblins)
             {
