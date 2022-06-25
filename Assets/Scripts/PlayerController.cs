@@ -6,11 +6,6 @@ public class PlayerController : MonoBehaviour
 {
     public Animator animator;
     public float horizontalMove = 0f;
-    private GameObject healthBar;
-
-    private void Start() {
-        healthBar = GameObject.Find("HealthBar");        
-    }
 
     public void move(float direction, float moveSpeed) 
     {
@@ -29,7 +24,6 @@ public class PlayerController : MonoBehaviour
         {
             Vector3 moveTo = horizontalMove > 0 ? Vector3.right : Vector3.left;
             transform.Translate(moveTo * Time.deltaTime * Mathf.Abs(horizontalMove));
-            healthBar.transform.Translate(moveTo * Mathf.Abs(horizontalMove));
         }
     }
 }

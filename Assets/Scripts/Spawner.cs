@@ -10,7 +10,7 @@ public class Spawner : MonoBehaviour
     private float enemyNextSpawnTime = 0f;
     private float enemySpawnTime = 10f;
     // Left position, right position
-    Vector3[] enemySpawnPosition = {new Vector3(-7f, -2.5f, -2), new Vector3(7f, -2.5f, -2)};
+    Vector3[] enemySpawnPosition = {new Vector3(-7f, -2.5f, 0), new Vector3(7f, -2.5f, 0)};
     
     public GameObject food;
     private float foodSpawnTime = 15f;
@@ -38,6 +38,14 @@ public class Spawner : MonoBehaviour
         {
             spawEnemy();
             enemyNextSpawnTime += enemySpawnTime;
+        }
+
+        if(enemySpawnTime > 2)
+        {
+            if(player.GetComponent<Player>().score % 5 == 0 && player.GetComponent<Player>().score != 0)
+            {
+                enemySpawnTime -= 0.5f;
+            }
         }
     }
 

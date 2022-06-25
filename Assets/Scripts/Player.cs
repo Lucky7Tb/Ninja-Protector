@@ -38,7 +38,17 @@ public class Player : MonoBehaviour
         {
             if(health > 0)
             {
-                playerController.move(Input.GetAxisRaw("Horizontal"), moveSpeed);
+                float move = Input.GetAxisRaw("Horizontal");
+                
+                if(move == -1 && transform.position.x <= -11) {
+                    move = 0;
+                }
+                
+                if(move == 1 && transform.position.x >= 11) {
+                    move = 0;
+                }
+
+                playerController.move(move, moveSpeed);
             
                 if(Time.time > nextAttackTime) 
                 {
