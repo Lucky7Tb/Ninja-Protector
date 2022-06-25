@@ -55,6 +55,6 @@ public class Enemy : MonoBehaviour
         transform.position = position;
         GetComponent<Collider2D>().enabled = false;
         Destroy(this);
-        Destroy(gameObject);
+        Destroy(gameObject, 2);
     }
 }

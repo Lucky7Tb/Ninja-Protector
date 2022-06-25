@@ -17,12 +17,15 @@ public class Spawner : MonoBehaviour
     private float foodSpawnTime = 15f;
 
     public GameObject attackPowerUpIcon;
-    private float attackPowerUpSpawnTime = 40f;
+    private float attackPowerUpSpawnTime = 30f;
 
     public GameObject instantEnemyDeathIcon;
-    private float instantEnemyDeathSpawnTime = 50f;
+    private float instantEnemyDeathSpawnTime = 40f;
 
     public bool isGameOver;
+
+    private float reduceSpawnEnemyTime = 40f;
+    private float nextReduceSpawnEnemyTime = 0f;
 
     void Start()
     {
@@ -40,13 +43,11 @@ public class Spawner : MonoBehaviour
             spawEnemy();
             enemyNextSpawnTime += enemySpawnTime;
         }
-
-        if(enemySpawnTime > 2)
+        
+        if(Time.time > nextReduceSpawnEnemyTime)
         {
-            if(player.GetComponent<Player>().score % 5 == 0 && player.GetComponent<Player>().score != 0)
-            {
-                enemySpawnTime -= 0.5f;
-            }
+            nextReduceSpawnEnemyTime += reduceSpawnEnemyTime;
+            enemySpawnTime -= 0.5f;
         }
     }
 

@@ -27,6 +27,7 @@ public class Player : MonoBehaviour
     
     public AudioClip swordSound; 
     public AudioClip appleBiteSound;
+    public AudioClip pickupItemSound;
     private AudioSource playerAudio;
     
     void Start() {
@@ -77,7 +78,6 @@ public class Player : MonoBehaviour
     {
         yield return new WaitForSeconds(10);
         damage -= 10f;
-        attackRate += 0.5f;
         powerUpText.gameObject.SetActive(false);
     }
 
@@ -110,25 +110,15 @@ public class Player : MonoBehaviour
         {
             Destroy(other.gameObject);
             damage += 10f;
-            attackRate -= 0.5f;
             StartCoroutine(PowerupCooldown());
+            playerAudio.PlayOneShot(pickupItemSound, 0.3f);
             powerUpText.gameObject.SetActive(true);
         }
 
         if(other.gameObject.CompareTag("InstantEnemyDeath"))
         {
             Destroy(other.gameObject);
-            GameObject[] goblins = GameObject.FindGameObjectsWithTag("Enemy");
-            foreach(GameObject goblin in goblins)
-            {
-                goblin.GetComponent<Enemy>().takeDamage(10000f);
-            }
-        }
-        
-        if(other.gameObject.CompareTag("SleepingDust"))
-        {
-            Destroy(other.gameObject);
-
+            playerAudio.PlayOneShot(pickupItemSound, 0.3f);
             GameObject[] goblins = GameObject.FindGameObjectsWithTag("Enemy");
             foreach(GameObject goblin in goblins)
             {
