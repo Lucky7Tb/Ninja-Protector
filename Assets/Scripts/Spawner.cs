@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Spawner : MonoBehaviour
 {
@@ -91,5 +92,10 @@ public class Spawner : MonoBehaviour
     {
         int randomXPosition = Random.Range(-9, 8);
         return new Vector3(randomXPosition, 3, 3);
+    }
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

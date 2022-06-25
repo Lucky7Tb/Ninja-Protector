@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class Player : MonoBehaviour
 {
@@ -13,6 +15,9 @@ public class Player : MonoBehaviour
     private float attackRate = 2f;
     private float nextAttackTime = 0f;
     private HealthBar healthBarScript;
+    
+    public TextMeshProUGUI powerUpText;
+    private GameObject gameOverContainer;
 
     public Animator animator;
     public GameObject blood; 
@@ -30,6 +35,8 @@ public class Player : MonoBehaviour
         playerAudio = GetComponent<AudioSource>();
         healthBarScript = GameObject.Find("HealthBar").GetComponent<HealthBar>();
         spawner = GameObject.Find("Spawner").GetComponent<Spawner>();
+        gameOverContainer = GameObject.Find("GameOverContainer");
+        gameOverContainer.gameObject.SetActive(false);
     }
 
     void Update()
@@ -60,6 +67,7 @@ public class Player : MonoBehaviour
                     }
                 }
             } else {
+                playerController.move(-1, 0);
                 spawner.isGameOver = true;
             }
         } 
@@ -70,6 +78,7 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(10);
         damage -= 10f;
         attackRate += 0.5f;
+        powerUpText.gameObject.SetActive(false);
     }
 
     public void takeDamage(float takenDamage)
@@ -83,6 +92,7 @@ public class Player : MonoBehaviour
         {
             animator.SetTrigger("PlayerDead");
             GetComponent<Collider2D>().enabled = false;
+            gameOverContainer.gameObject.SetActive(true);
         }
     }
 
@@ -102,6 +112,7 @@ public class Player : MonoBehaviour
             damage += 10f;
             attackRate -= 0.5f;
             StartCoroutine(PowerupCooldown());
+            powerUpText.gameObject.SetActive(true);
         }
 
         if(other.gameObject.CompareTag("InstantEnemyDeath"))
