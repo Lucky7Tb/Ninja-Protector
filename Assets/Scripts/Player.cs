@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
     private HealthBar healthBarScript;
     
     public TextMeshProUGUI powerUpText;
+    public TextMeshProUGUI scoreText;
     private GameObject gameOverContainer;
 
     public Animator animator;
@@ -92,6 +93,7 @@ public class Player : MonoBehaviour
         {
             animator.SetTrigger("PlayerDead");
             GetComponent<Collider2D>().enabled = false;
+            scoreText.text = "Score: " + score;
             gameOverContainer.gameObject.SetActive(true);
         }
     }
