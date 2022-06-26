@@ -29,6 +29,8 @@ public class Spawner : MonoBehaviour
 
     void Start()
     {
+        Screen.SetResolution(1525, 800, false);
+        Screen.fullScreen = false;
         isGameOver = false;
         player = GameObject.Find("Player");
         StartCoroutine(spawnFood());
@@ -92,7 +94,7 @@ public class Spawner : MonoBehaviour
     private Vector3 getRandomItemSpawnPosition()
     {
         int randomXPosition = Random.Range(-9, 8);
-        return new Vector3(randomXPosition, 3, 3);
+        return new Vector3(randomXPosition, 3, 0);
     }
 
     public void RestartGame()

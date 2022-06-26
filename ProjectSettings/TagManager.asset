@@ -18,8 +18,8 @@ TagManager:
   - UI
   - Player
   - Enemy
-  - 
-  - 
+  - Moon
+  - Cloud
   - 
   - 
   - 
@@ -46,6 +46,18 @@ TagManager:
   - name: Background
     uniqueID: 580241707
     locked: 0
+  - name: Cloud
+    uniqueID: 2276128571
+    locked: 0
+  - name: Moon
+    uniqueID: 3129801837
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Player
+    uniqueID: 1398712171
+    locked: 0
+  - name: Enemy
+    uniqueID: 414755197
     locked: 0

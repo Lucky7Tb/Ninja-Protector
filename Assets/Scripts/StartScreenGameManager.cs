@@ -10,6 +10,7 @@ public class StartScreenGameManager : MonoBehaviour
 
     void Start()
     {
+        Screen.SetResolution(1025, 768, false);
         playerAudio = GetComponent<AudioSource>();
         playerAudio.loop = true;
         playerAudio.PlayOneShot(backgroundSound, 1f);
